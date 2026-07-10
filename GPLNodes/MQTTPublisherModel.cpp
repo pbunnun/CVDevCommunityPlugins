@@ -441,4 +441,16 @@ setInData( std::shared_ptr< NodeData > nodeData, PortIndex )
     }
 }
 
-
+QString
+MQTTPublisherModel::
+portToolTip(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
+{
+    if (portType == QtNodes::PortType::In)
+    {
+        if (portIndex == 0)
+            return "Trigger Sync: Input synchronization signal to trigger publishing.";
+        else if (portIndex == 1)
+            return "Publish Message: Text/string information to publish to the MQTT topic.";
+    }
+    return PBNodeDelegateModel::portToolTip(portType, portIndex);
+}

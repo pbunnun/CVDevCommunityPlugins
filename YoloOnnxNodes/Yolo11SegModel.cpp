@@ -293,4 +293,21 @@ load_model()
     }
 }
 
-
+QString
+Yolo11SegModel::
+portToolTip(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
+{
+    if (portType == QtNodes::PortType::In)
+    {
+        if (portIndex == 0)
+            return "Source Image: Input frame to run YOLO instance segmentation on.";
+    }
+    else if (portType == QtNodes::PortType::Out)
+    {
+        if (portIndex == 0)
+            return "Segmentation Mask: Input frame overlaid with transparent segmented class masks.";
+        else if (portIndex == 1)
+            return "Sync Out: Emitted when instance segmentation completes.";
+    }
+    return PBNodeDelegateModel::portToolTip(portType, portIndex);
+}

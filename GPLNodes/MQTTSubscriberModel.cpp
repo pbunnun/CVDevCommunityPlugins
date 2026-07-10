@@ -382,4 +382,14 @@ mqtt_message_received(const QByteArray &message, const QMqttTopicName &)
     updateAllOutputPorts();
 }
 
-
+QString
+MQTTSubscriberModel::
+portToolTip(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
+{
+    if (portType == QtNodes::PortType::Out)
+    {
+        if (portIndex == 0)
+            return "Received Message: Extracted string message payload received from the MQTT topic.";
+    }
+    return PBNodeDelegateModel::portToolTip(portType, portIndex);
+}

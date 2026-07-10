@@ -292,4 +292,21 @@ load_model()
     }
 }
 
-
+QString
+Yolo11DetModel::
+portToolTip(QtNodes::PortType portType, QtNodes::PortIndex portIndex) const
+{
+    if (portType == QtNodes::PortType::In)
+    {
+        if (portIndex == 0)
+            return "Source Image: Input frame to run YOLO object detection on.";
+    }
+    else if (portType == QtNodes::PortType::Out)
+    {
+        if (portIndex == 0)
+            return "Annotated Image: Input frame with bounding boxes and labels drawn on detected objects.";
+        else if (portIndex == 1)
+            return "Sync Out: Emitted when the object detection completes.";
+    }
+    return PBNodeDelegateModel::portToolTip(portType, portIndex);
+}
